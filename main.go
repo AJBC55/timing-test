@@ -38,6 +38,8 @@ func main() { // Create a new request to the SSE endpoint
 	/// in the case of the first message unmarshal it into session Into this will be the state for the session data
 	// in the case of a newly started session the fields will be empty
 	// in the case of a already started session some fields might be filed or all fields might be filled
+	// sett the by possition variable to true by default
+	// will be used to determin where we are sorting by race postion or practice/qualifing time
 	byPos := true
 	var sd SessionInfo
 	data := <-msg
@@ -47,8 +49,7 @@ func main() { // Create a new request to the SSE endpoint
 	// create pointer to session data as not not reset the other values
 	currentSession := sd
 	fmt.Println(currentSession)
-	for {
-		updateData := <-msg
+	for updateData := range msg {
 		// use the coutom json unmarshaling to unmashal the data
 		var tm TimingMessage
 		tm.Unmarshal(updateData)
@@ -75,6 +76,21 @@ func main() { // Create a new request to the SSE endpoint
 				}
 			}
 			// sort the racer based on race position if selected race position sorting else leave alone
+			//
+
+			// case H
+			// find the racer with the same registation number
+			// then update their practice qualifying position
+			// if the sort by pos var is false then sort by the practice qualifing position
+
+			// case J
+			// find the racer with the same registration number
+			// add the passing info to their passes
+
+			// case I
+			//clear the session information and reset  the sessiondata to be default with no values
+
+			// continue to handle the other types of messages
 
 		}
 		// ie update the state after a change to the session
