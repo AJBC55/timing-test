@@ -49,6 +49,7 @@ func main() { // Create a new request to the SSE endpoint
 	// create pointer to session data as not not reset the other values
 	currentSession := sd
 	fmt.Println(currentSession)
+	// each time anoter message is recived
 	for updateData := range msg {
 		// use the coutom json unmarshaling to unmashal the data
 		var tm TimingMessage
