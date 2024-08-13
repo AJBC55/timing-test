@@ -77,6 +77,7 @@ func main() { // Create a new request to the SSE endpoint
 			// sort the racer based on race position if selected race position sorting else leave alone
 
 		}
+		// ie update the state after a change to the session
 		fmt.Println(currentSession)
 
 	}
